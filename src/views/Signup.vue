@@ -502,7 +502,7 @@ import router from "../router";
 
 let max_year = new Date().getFullYear() - 18;
 
-let signup_fee = 30000;
+let signup_fee = 22000;
 let sponsor_code = "";
 let email = "";
 let email_again = "";
