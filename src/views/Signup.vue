@@ -543,16 +543,8 @@ export default {
             );
           }
         });
-    }
-  },
-  mounted() {
-    var parameters = this.$route.params;
-    this.sponsor_code = parameters.sp;
-    console.log(parameters);
-    if (!this.sp) {
-      router.push("/no-code");
     } else {
-      localStorage.setItem("SP", this.sponsor_code);
+      router.push("/no-code");
     }
   },
   data() {
