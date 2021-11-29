@@ -535,6 +535,7 @@ export default {
           if (response.data.ok) {
             console.log("SPONSOR CODE " + sp);
             this.sponsor_code = sp;
+
           } else {
             VueSimpleAlert.alert(
               "Seems, you do not have a valid sponsor code",
@@ -601,7 +602,7 @@ export default {
           console.log("CREATING ACCOUNT ENTER PIN TO PROCEED..");
           try {
             const requestOptions = {
-              sponsor_code: localStorage.getItem("SP"),
+              sponsor_code: this.sponsor_code,
               email: this.email,
               email_again: this.email_again,
               password: this.password,
