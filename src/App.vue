@@ -1,28 +1,18 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <!-- <notifications group="app" position="bottom right">
+      <template slot="body" slot-scope="props">
+        <div>
+          <a class="title">
+            {{ props.item.title }}
+          </a>
+          <a class="close" @click="props.close">
+            <i class="fa fa-fw fa-close"></i>
+          </a>
+          <div v-html="props.item.text"></div>
+        </div>
+      </template>
+    </notifications> -->
+    <router-view />
   </div>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
