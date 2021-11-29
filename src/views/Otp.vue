@@ -126,11 +126,9 @@ export default {
                 requestOptions
               )
               .then((response) => {
-                console.debug(response);
-                resp = response.json();
-              })
-              .then((data) => {
-                if (resp.ok) {
+                // console.debug(response);
+                var data = response.data;
+                if (data.ok) {
                   VueSimpleAlert.alert(
                     "OTP VERIFIED, PLEASE CONFIRM PAYMENT TO CREATE YOUR ACCOUNT",
                     "",

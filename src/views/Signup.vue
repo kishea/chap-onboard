@@ -649,6 +649,7 @@ export default {
                     "",
                     "success"
                   ).then((ok) => {
+                    console.log(ok);
                     router.push("/one-time-pin");
                   });
                 } else {
