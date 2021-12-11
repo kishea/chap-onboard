@@ -123,7 +123,7 @@
             />
           </div>
 
-          <div class="flex-grow mt-4">
+          <!-- <div class="flex-grow mt-4">
             <label
               for="email_confirmation"
               class="inline-block font-extrabold text-xs my-2 tracking-wider"
@@ -145,7 +145,7 @@
               placeholder="Enter your email again."
               v-model="email_again"
             />
-          </div>
+          </div> -->
 
           <div class="flex-grow mt-4">
             <label
@@ -199,7 +199,7 @@
             <label
               for="profile_name"
               class="inline-block font-extrabold text-xs my-2 tracking-wider"
-              >What should we call you?</label
+              >What's your name</label
             ><br />
             <input
               class="
@@ -626,13 +626,13 @@ export default {
               )
               .then((response) => {
                 // console.log(response);
-                var data = response.data;
+                var data = response.data.data;
                 console.log("\n================================\n");
-                console.log("Success:", response);
+                console.log("Success:", response.data);
                 console.log("\n================================\n");
                 // const data2 = response.then((dd) => dd.json());
                 if (data.ok) {
-                  localStorage.setItem("OTP", data.OTP);
+                  localStorage.setItem("OTP", data.otp);
                   VueSimpleAlert.confirm(
                     "Hello " +
                       this.user_name +

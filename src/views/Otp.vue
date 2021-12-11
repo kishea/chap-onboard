@@ -46,41 +46,62 @@
         </div>
 
         <hr class="mt-8 mb-6 w-84 mx-auto border-gray-400" />
-        <form action="">
-          <!-- <h3 class="text-center font-bold tracking-wide mt-0">
-            Enter your OTP
-          </h3> -->
-          <div
-            class="flex-col justify-center w-11/12 md:w-4/6 lg:w-3/6 mx-auto"
-          >
-            <div class="flex-grow mt-4">
-              <label
-                for="email"
-                class="inline-block font-extrabold text-xs my-2 tracking-wider"
-                >What's the OTP sent to your phone number?</label
-              ><br />
-              <input
-                class="
-                  w-full
-                  py-1
-                  px-2
-                  border border-gray-500
-                  placeholder-gray-600
-                  rounded
-                  text-3xl
-                  focus:outline-none focus:border-gray-900
-                "
-                type="tel"
-                required
-                placeholder="Enter OTP"
-                v-model="otp"
-                :change="check_otp"
-                maxlength="6"
-                minlength="6"
-              />
-            </div>
+
+        <div class="flex-col justify-center w-11/12 md:w-4/6 lg:w-3/6 mx-auto">
+          <div class="flex-grow mt-4">
+            <label
+              for="email"
+              class="inline-block font-extrabold text-xs my-2 tracking-wider"
+              >What's the OTP sent to your phone number?</label
+            ><br />
+            <input
+              class="
+                w-full
+                py-1
+                px-2
+                border border-gray-500
+                placeholder-gray-600
+                rounded
+                text-2xl
+                focus:outline-none focus:border-gray-900
+              "
+              type="tel"
+              required
+              placeholder="Enter OTP"
+              v-model="otp"
+              :change="check_otp"
+              maxlength="6"
+              minlength="6"
+            />
           </div>
-        </form>
+
+          <button
+            class="
+              mt-4
+              w-full
+              p-3
+              uppercase
+              text-sm
+              font-bold
+              text-white
+              bg-red-600
+              rounded
+              tracking-widest
+              hover:bg-red-500
+              transform
+              hover:scale-105
+              focus:scale-100
+              focus:bg-red-800
+              focus:text-opacity-75
+              focus:bg-opacity-100
+              outline-none
+            "
+            @click="submit"
+            type="submit"
+          >
+            OKAY
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -103,47 +124,50 @@ export default {
   },
   methods: {
     check_otp() {
-      if (localStorage.getItem("OTP") !== this.otp) {
+      if (localStorage.getItem("OTP") == this.otp) {
         valid_otp = true;
-      }
-      if (this.otp.length == 6) {
         this.submit();
       }
     },
     async submit() {
-      if (localStorage.getItem("OTP") !== this.otp) {
-        VueSimpleAlert.alert("INVALID OTP", "", "error");
-      } else {
-        try {
-          const requestOptions = {
-            phone_number: localStorage.getItem("phone_number"),
-            otp: localStorage.getItem("OTP"),
-          };
-          if (valid_otp) {
-            axios
-              .post(
-                "https://apis.chapchap.co:8090/api/v1/complete-signup",
-                requestOptions
-              )
-              .then((response) => {
-                // console.debug(response);
-                var data = response.data;
-                if (data.ok) {
-                  VueSimpleAlert.alert(
-                    "OTP VERIFIED, PLEASE CONFIRM PAYMENT TO CREATE YOUR ACCOUNT",
-                    "",
-                    "info"
-                  );
-                } else {
-                  VueSimpleAlert.alert(data.message, "", "error");
-                }
-              });
-            this.$router.push("/welcome");
-          }
-        } catch (error) {
-          console.log(error);
-          this.$router.push("/");
+      if (this.otp.length == 6) {
+        VueSimpleAlert.alert("Checking OTP ..", "", "error");
+        this.submiting();
+      }
+    },
+    async submiting() {
+      try {
+        const requestOptions = {
+          phone_number: localStorage.getItem("phone_number"),
+          otp: localStorage.getItem("OTP"),
+        };
+        if (valid_otp) {
+          axios
+            .post(
+              "https://apis.chapchap.co:8090/api/v1/complete-signup",
+              requestOptions
+            )
+            .then((response) => {
+              // console.debug(response);
+              var data = response.data.data;
+              if (data.ok) {
+                VueSimpleAlert.confirm(
+                  "OTP VERIFIED, PLEASE CONFIRM PAYMENT TO CREATE YOUR ACCOUNT",
+                  "",
+                  "info"
+                ).then((resp) => {
+                  console.log(resp);
+                  this.$router.push("/welcome");
+                });
+              } else {
+                VueSimpleAlert.alert(data.message, "", "error");
+              }
+            });
+          // this.$router.push("/welcome");
         }
+      } catch (error) {
+        console.log(error);
+        this.$router.push("/");
       }
     },
   },
