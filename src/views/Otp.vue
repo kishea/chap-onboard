@@ -96,8 +96,8 @@
               focus:bg-opacity-100
               outline-none
             "
-            @click="submit"
-            type="submit"
+            @click="check_otp"
+            type="button"
           >
             OKAY
           </button>
