@@ -633,6 +633,7 @@ export default {
                 // const data2 = response.then((dd) => dd.json());
                 if (response.data.ok) {
                   localStorage.setItem("OTP", data.otp);
+                  localStorage.setItem("phone_number", data.phoneNumber);
                   VueSimpleAlert.confirm(
                     "Hello " +
                       this.user_name +
