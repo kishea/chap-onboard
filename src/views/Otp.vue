@@ -150,7 +150,7 @@ export default {
             .then((response) => {
               // console.debug(response);
               var data = response.data.data;
-              if (data.ok) {
+              if (response.data.ok) {
                 VueSimpleAlert.confirm(
                   "OTP VERIFIED, PLEASE CONFIRM PAYMENT TO CREATE YOUR ACCOUNT",
                   "",

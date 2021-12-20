@@ -631,7 +631,7 @@ export default {
                 console.log("Success:", response.data);
                 console.log("\n================================\n");
                 // const data2 = response.then((dd) => dd.json());
-                if (data.ok) {
+                if (response.data.ok) {
                   localStorage.setItem("OTP", data.otp);
                   VueSimpleAlert.confirm(
                     "Hello " +
@@ -646,7 +646,7 @@ export default {
                     router.push("/one-time-pin");
                   });
                 } else {
-                  VueSimpleAlert.alert(data.message, "", "error");
+                  VueSimpleAlert.alert(response.data.message, "", "error");
                 }
               })
               .catch((error) => {
