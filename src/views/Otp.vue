@@ -131,7 +131,6 @@ export default {
     },
     async submit() {
       if (this.otp.length == 6) {
-        VueSimpleAlert.alert("Checking OTP ..", "", "error");
         this.submiting();
       }
     },
