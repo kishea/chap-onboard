@@ -126,15 +126,17 @@ export default {
     check_otp() {
       if (localStorage.getItem("OTP") == this.otp) {
         valid_otp = true;
+        console.log(this.otp + "VALID");
         this.submit();
       }
     },
-    async submit() {
+    submit() {
       if (this.otp.length == 6) {
+        console.log(this.otp + "SUBMITTING");
         this.submiting();
       }
     },
-    async submiting() {
+    submiting() {
       try {
         const requestOptions = {
           phone_number: localStorage.getItem("phone_number"),
